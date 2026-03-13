@@ -1,0 +1,19 @@
+<Solution>
+  <Folder Name="/Src/" />
+  <Folder Name="/Src/API/">
+    <Project Path="GharKharchaAPI/GharKharchaAPI.csproj" />
+  </Folder>
+  <Folder Name="/Src/Core/" />
+  <Folder Name="/Src/Core/GharKharchaAPI.Application/">
+    <Project Path="GharKharchaAPI.Application/GharKharchaAPI.Application.csproj" />
+  </Folder>
+  <Folder Name="/Src/Core/GharKharchaAPI.Constants/">
+    <Project Path="GharKharchaAPI.Constants/GharKharchaAPI.Constants.csproj" />
+  </Folder>
+  <Folder Name="/Src/Core/GharKharchaAPI.Domain/">
+    <Project Path="GharKharchaAPI.Domain/GharKharchaAPI.Domain.csproj" />
+  </Folder>
+  <Folder Name="/Src/Data/">
+    <Project Path="GharKharchaAPI.Data/GharKharchaAPI.Data.csproj" />
+  </Folder>
+</Solution>

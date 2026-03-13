@@ -1,0 +1,6 @@
+@GharKharchaAPI_HostAddress = http://localhost:5033
+
+GET {{GharKharchaAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
