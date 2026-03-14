@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GharKharchaAPI.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aa85c04f6ae18bc3d4f52a7599cba1ef901457f4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3f27261add0c02eaa9bfec89f4c6fadfda3acd4")]
 [assembly: System.Reflection.AssemblyProductAttribute("GharKharchaAPI.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GharKharchaAPI.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

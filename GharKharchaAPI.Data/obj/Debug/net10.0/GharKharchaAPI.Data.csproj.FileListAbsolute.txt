@@ -1,0 +1,15 @@
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Data\bin\Debug\net10.0\GharKharchaAPI.Data.deps.json
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Data\bin\Debug\net10.0\GharKharchaAPI.Data.runtimeconfig.json
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Data\bin\Debug\net10.0\GharKharchaAPI.Data.dll
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Data\bin\Debug\net10.0\GharKharchaAPI.Data.pdb
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Data\obj\Debug\net10.0\GharKharchaAPI.Data.csproj.AssemblyReference.cache
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Data\obj\Debug\net10.0\GharKharchaAPI.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Data\obj\Debug\net10.0\GharKharchaAPI.Data.AssemblyInfoInputs.cache
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Data\obj\Debug\net10.0\GharKharchaAPI.Data.AssemblyInfo.cs
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Data\obj\Debug\net10.0\GharKharchaAPI.Data.csproj.CoreCompileInputs.cache
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Data\obj\Debug\net10.0\GharKharchaAPI.Data.sourcelink.json
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Data\obj\Debug\net10.0\GharKharchaAPI.Data.dll
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Data\obj\Debug\net10.0\refint\GharKharchaAPI.Data.dll
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Data\obj\Debug\net10.0\GharKharchaAPI.Data.pdb
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Data\obj\Debug\net10.0\GharKharchaAPI.Data.genruntimeconfig.cache
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Data\obj\Debug\net10.0\ref\GharKharchaAPI.Data.dll

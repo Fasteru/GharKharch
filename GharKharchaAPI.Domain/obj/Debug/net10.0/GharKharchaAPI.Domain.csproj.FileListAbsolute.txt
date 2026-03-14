@@ -1,0 +1,12 @@
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Domain\bin\Debug\net10.0\GharKharchaAPI.Domain.deps.json
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Domain\bin\Debug\net10.0\GharKharchaAPI.Domain.dll
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Domain\bin\Debug\net10.0\GharKharchaAPI.Domain.pdb
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Domain\obj\Debug\net10.0\GharKharchaAPI.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Domain\obj\Debug\net10.0\GharKharchaAPI.Domain.AssemblyInfoInputs.cache
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Domain\obj\Debug\net10.0\GharKharchaAPI.Domain.AssemblyInfo.cs
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Domain\obj\Debug\net10.0\GharKharchaAPI.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Domain\obj\Debug\net10.0\GharKharchaAPI.Domain.sourcelink.json
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Domain\obj\Debug\net10.0\GharKharchaAPI.Domain.dll
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Domain\obj\Debug\net10.0\refint\GharKharchaAPI.Domain.dll
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Domain\obj\Debug\net10.0\GharKharchaAPI.Domain.pdb
+C:\Users\Alishan\source\repos\Fasteru\GharKharch\GharKharchaAPI.Domain\obj\Debug\net10.0\ref\GharKharchaAPI.Domain.dll
