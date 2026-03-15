@@ -1,24 +1,17 @@
-﻿using AutoMapper;
-using GharKharchaAPI.Data.Context;
+﻿using GharKharchaAPI.Data.Context;
 using GharKharchaAPI.Data.Entities;
-using GharKharchaAPI.Domain.Models;
 using GharKharchaAPI.Domain.Models.DTO;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GharKharchaAPI.Application.Features
 {
     public class ExpenseService
     {
         private readonly AppDbContext _context;
-        private readonly IMapper _mapper;
 
-        public ExpenseService(AppDbContext context, IMapper mapper)
+        public ExpenseService(AppDbContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
         // Get all expenses for a family
@@ -118,9 +111,8 @@ namespace GharKharchaAPI.Application.Features
                 Notes = dto.Notes,
                 IsRecurring = dto.IsRecurring,
                 CreatedAt = DateTime.Now
-            };
-            var data = _mapper.Map<Expense, ExpenseEntity>(expense);  
-            _context.Expenses.Add(data);
+            }; 
+            _context.Expenses.Add(expense);
             await _context.SaveChangesAsync();
 
             return await GetExpense(expense.ExpenseId, familyId);

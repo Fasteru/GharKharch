@@ -1,14 +1,11 @@
 ﻿using GharKharchaAPI.Application.Features;
 using GharKharchaAPI.Domain.Models.DTO;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace GharKharchaAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class ExpenseController : ControllerBase
     {
         private readonly ExpenseService _expenseService;
@@ -18,24 +15,17 @@ namespace GharKharchaAPI.Controllers
             _expenseService = expenseService;
         }
 
-        // Get family ID from JWT token
-        private int GetFamilyId() =>
-            int.Parse(User.FindFirst("FamilyId")!.Value);
-
-        // Get user ID from JWT token
-        private int GetUserId() =>
-            int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
-
         // GET api/expense
         [HttpGet]
         public async Task<IActionResult> GetExpenses(
+            [FromQuery] int familyId,
             [FromQuery] string? monthYear,
             [FromQuery] int? expenseTypeId)
         {
             try
             {
                 var result = await _expenseService.GetExpenses(
-                    GetFamilyId(),
+                    familyId,
                     monthYear,
                     expenseTypeId);
                 return Ok(result);
@@ -48,13 +38,14 @@ namespace GharKharchaAPI.Controllers
 
         // GET api/expense/{id}
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetExpense(int id)
+        public async Task<IActionResult> GetExpense(
+            int id,
+            [FromQuery] int familyId)
         {
             try
             {
                 var result = await _expenseService.GetExpense(
-                    id,
-                    GetFamilyId());
+                    id, familyId);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -71,14 +62,19 @@ namespace GharKharchaAPI.Controllers
             try
             {
                 var result = await _expenseService.AddExpense(
-                    GetFamilyId(),
-                    GetUserId(),
+                    dto.FamilyId,
+                    dto.UserId,
                     dto);
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = ex.Message });
+                return BadRequest(new
+                {
+                    message = ex.Message,
+                    inner = ex.InnerException?.Message,
+                    detail = ex.InnerException?.InnerException?.Message
+                });
             }
         }
 
@@ -92,8 +88,8 @@ namespace GharKharchaAPI.Controllers
             {
                 var result = await _expenseService.UpdateExpense(
                     id,
-                    GetFamilyId(),
-                    GetUserId(),
+                    dto.FamilyId,
+                    dto.UserId,
                     dto);
                 return Ok(result);
             }
@@ -105,14 +101,15 @@ namespace GharKharchaAPI.Controllers
 
         // DELETE api/expense/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteExpense(int id)
+        public async Task<IActionResult> DeleteExpense(
+            int id,
+            [FromQuery] int familyId)
         {
             try
             {
                 await _expenseService.DeleteExpense(
-                    id,
-                    GetFamilyId());
-                return Ok(new { message = "Expense deleted successfully!" });
+                    id, familyId);
+                return Ok(new { message = "Expense deleted!" });
             }
             catch (Exception ex)
             {

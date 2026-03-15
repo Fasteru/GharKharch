@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GharKharchaAPI.Data.Entities
 {
-    public class ExpenseTypeEntity
+    public class ExpenseType
     {
         [Key]
         public int ExpenseTypeId { get; set; }
@@ -18,7 +18,7 @@ namespace GharKharchaAPI.Data.Entities
         public bool IsDefault { get; set; } = true;
 
         // Navigation
-        public ICollection<ExpenseEntity> Expenses { get; set; } = new List<ExpenseEntity>();
-        public ICollection<BudgetEntity> Budgets { get; set; } = new List<BudgetEntity>();
+        public ICollection<Expense> Expenses { get; set; } = new List<Expense>();
+        public ICollection<Budget> Budgets { get; set; } = new List<Budget>();
     }
 }

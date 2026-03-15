@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GharKharchaAPI.Data.Entities
 {
-    public class RecurringExpenseEntity
+    public class RecurringExpense
     {
         [Key]
         public int RecurringId { get; set; }
@@ -33,8 +33,8 @@ namespace GharKharchaAPI.Data.Entities
         public bool IsActive { get; set; } = true;
 
         // Navigation
-        public FamilyEntity Family { get; set; } = null!;
-        public ExpenseTypeEntity ExpenseType { get; set; } = null!;
-        public UserEntity AddedBy { get; set; } = null!;
+        public Family Family { get; set; } = null!;
+        public ExpenseType ExpenseType { get; set; } = null!;
+        public User AddedBy { get; set; } = null!;
     }
 }

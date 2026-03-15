@@ -1,24 +1,17 @@
-﻿using AutoMapper;
-using GharKharchaAPI.Data.Context;
+﻿using GharKharchaAPI.Data.Context;
 using GharKharchaAPI.Data.Entities;
-using GharKharchaAPI.Domain.Models;
 using GharKharchaAPI.Domain.Models.DTO;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GharKharchaAPI.Application.Features
 {
     public class BudgetService
     {
         private readonly AppDbContext _context;
-        private readonly IMapper _mapper;
 
-        public BudgetService(AppDbContext context, IMapper mapper)
+        public BudgetService(AppDbContext context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
         // Get all budgets for a family for a month
@@ -77,10 +70,12 @@ namespace GharKharchaAPI.Application.Features
 
         // Add budget
         public async Task<BudgetResponseDto> AddBudget(
-            int familyId,
-            AddBudgetDto dto)
+    int familyId,
+    AddBudgetDto dto)
         {
-            // Check if budget already exists
+            Budget budget;
+
+            // Check if budget already exists for same month + category
             var existing = await _context.Budgets
                 .FirstOrDefaultAsync(b =>
                     b.FamilyId == familyId &&
@@ -89,14 +84,15 @@ namespace GharKharchaAPI.Application.Features
 
             if (existing != null)
             {
-                // Update existing budget
+                // Update existing
                 existing.LimitAmount = dto.LimitAmount;
                 await _context.SaveChangesAsync();
+                budget = existing;
             }
             else
             {
-                // Add new budget
-                var budget = new Budget
+                // Create new
+                budget = new Budget
                 {
                     FamilyId = familyId,
                     ExpenseTypeId = dto.ExpenseTypeId,
@@ -104,16 +100,59 @@ namespace GharKharchaAPI.Application.Features
                     LimitAmount = dto.LimitAmount,
                     CreatedAt = DateTime.Now
                 };
-                var data = _mapper.Map<Budget, BudgetEntity>(budget);
-                _context.Budgets.Add(data);
+                _context.Budgets.Add(budget);
                 await _context.SaveChangesAsync();
             }
 
-            var budgets = await GetBudgets(familyId, dto.MonthYear);
-            return budgets.First(b => b.ExpenseTypeName ==
-                (dto.ExpenseTypeId.HasValue
-                    ? _context.ExpenseTypes.Find(dto.ExpenseTypeId)?.Name
-                    : null));
+            // Calculate spent for this budget
+            var parts = dto.MonthYear.Split('-');
+            var year = int.Parse(parts[0]);
+            var month = int.Parse(parts[1]);
+
+            var expenses = await _context.Expenses
+                .Where(e =>
+                    e.FamilyId == familyId &&
+                    e.ExpenseDate.Year == year &&
+                    e.ExpenseDate.Month == month)
+                .ToListAsync();
+
+            var spent = budget.ExpenseTypeId.HasValue
+                ? expenses
+                    .Where(e => e.ExpenseTypeId == budget.ExpenseTypeId)
+                    .Sum(e => e.Amount)
+                : expenses.Sum(e => e.Amount);
+
+            var remaining = budget.LimitAmount - spent;
+            var percentage = budget.LimitAmount > 0
+                ? (int)((spent / budget.LimitAmount) * 100)
+                : 0;
+
+            // Get expense type name if category budget
+            string? expenseTypeName = null;
+            string? expenseTypeIcon = null;
+            string? expenseTypeColor = null;
+
+            if (budget.ExpenseTypeId.HasValue)
+            {
+                var expenseType = await _context.ExpenseTypes
+                    .FindAsync(budget.ExpenseTypeId);
+                expenseTypeName = expenseType?.Name;
+                expenseTypeIcon = expenseType?.Icon;
+                expenseTypeColor = expenseType?.ColorCode;
+            }
+
+            return new BudgetResponseDto
+            {
+                BudgetId = budget.BudgetId,
+                MonthYear = budget.MonthYear,
+                LimitAmount = budget.LimitAmount,
+                SpentAmount = spent,
+                RemainingAmount = remaining,
+                PercentageUsed = percentage,
+                ExpenseTypeName = expenseTypeName,
+                ExpenseTypeIcon = expenseTypeIcon,
+                ExpenseTypeColor = expenseTypeColor
+            };
         }
 
         // Delete budget

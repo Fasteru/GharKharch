@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using GharKharchaAPI.Data.Context;
+﻿using GharKharchaAPI.Data.Context;
 using GharKharchaAPI.Data.Entities;
 using GharKharchaAPI.Domain.Models;
 using GharKharchaAPI.Domain.Models.DTO;
@@ -12,13 +11,11 @@ namespace GharKharchaAPI.Authentication
     {
         private readonly AppDbContext _context;
         private readonly JwtHelper _jwtHelper;
-        private readonly IMapper _mapper;
 
-        public AuthService(AppDbContext context, JwtHelper jwtHelper, IMapper mapper)
+        public AuthService(AppDbContext context, JwtHelper jwtHelper)
         {
             _context = context;
             _jwtHelper = jwtHelper;
-            _mapper = mapper;
         }
 
         // Register new family with admin user
@@ -34,8 +31,7 @@ namespace GharKharchaAPI.Authentication
                 FamilyName = dto.FamilyName,
                 CreatedAt = DateTime.Now
             };
-            var fam = _mapper.Map<Family, FamilyEntity>(family);
-            _context.Families.Add(fam);
+            _context.Families.Add(family);
             await _context.SaveChangesAsync();
 
             // Create admin user
@@ -48,8 +44,7 @@ namespace GharKharchaAPI.Authentication
                 Role = "admin",
                 CreatedAt = DateTime.Now
             };
-            var userData = _mapper.Map<User, UserEntity>(user);
-            _context.Users.Add(userData);
+            _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
             // Generate token
@@ -88,8 +83,7 @@ namespace GharKharchaAPI.Authentication
                 Role = dto.Role,
                 CreatedAt = DateTime.Now
             };
-            var userData = _mapper.Map<User, UserEntity>(user);
-            _context.Users.Add(userData);
+            _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
             // Generate token
@@ -121,8 +115,7 @@ namespace GharKharchaAPI.Authentication
                 throw new Exception("Invalid email or password!");
 
             // Generate token
-            var userData = _mapper.Map<UserEntity, User>(user);
-            var token = _jwtHelper.GenerateToken(userData);
+            var token = _jwtHelper.GenerateToken(user);
 
             return new AuthResponseDto
             {

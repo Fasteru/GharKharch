@@ -1,11 +1,17 @@
 ﻿
 
-namespace GharKharchaAPI.Domain.Models
+using System.ComponentModel.DataAnnotations;
+
+namespace GharKharchaAPI.Data.Entities
 {
     public class Family
     {
+        [Key]
         public int FamilyId { get; set; }
+
+        [Required]
         public string FamilyName { get; set; } = string.Empty;
+
         public DateTime CreatedAt { get; set; }
 
         // Navigation

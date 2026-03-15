@@ -7,9 +7,10 @@ namespace GharKharchaAPI.Domain.Models.DTO
     // Add/Update budget
     public class AddBudgetDto
     {
-        public int? ExpenseTypeId { get; set; }
+        public int FamilyId { get; set; }
         public string MonthYear { get; set; } = string.Empty;
         public decimal LimitAmount { get; set; }
+        public int? ExpenseTypeId { get; set; }
     }
 
     // Return budget data

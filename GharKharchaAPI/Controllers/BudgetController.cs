@@ -1,13 +1,11 @@
 ﻿using GharKharchaAPI.Application.Features;
 using GharKharchaAPI.Domain.Models.DTO;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GharKharchaAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class BudgetController : ControllerBase
     {
         private readonly BudgetService _budgetService;
@@ -17,18 +15,16 @@ namespace GharKharchaAPI.Controllers
             _budgetService = budgetService;
         }
 
-        private int GetFamilyId() =>
-            int.Parse(User.FindFirst("FamilyId")!.Value);
-
         // GET api/budget/{monthYear}
         [HttpGet("{monthYear}")]
-        public async Task<IActionResult> GetBudgets(string monthYear)
+        public async Task<IActionResult> GetBudgets(
+            string monthYear,
+            [FromQuery] int familyId)
         {
             try
             {
                 var result = await _budgetService.GetBudgets(
-                    GetFamilyId(),
-                    monthYear);
+                    familyId, monthYear);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -45,8 +41,7 @@ namespace GharKharchaAPI.Controllers
             try
             {
                 var result = await _budgetService.AddBudget(
-                    GetFamilyId(),
-                    dto);
+                    dto.FamilyId, dto);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -57,14 +52,15 @@ namespace GharKharchaAPI.Controllers
 
         // DELETE api/budget/{id}
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBudget(int id)
+        public async Task<IActionResult> DeleteBudget(
+            int id,
+            [FromQuery] int familyId)
         {
             try
             {
                 await _budgetService.DeleteBudget(
-                    id,
-                    GetFamilyId());
-                return Ok(new { message = "Budget deleted successfully!" });
+                    id, familyId);
+                return Ok(new { message = "Budget deleted!" });
             }
             catch (Exception ex)
             {
@@ -74,13 +70,14 @@ namespace GharKharchaAPI.Controllers
 
         // GET api/budget/report/{monthYear}
         [HttpGet("report/{monthYear}")]
-        public async Task<IActionResult> GetMonthlyReport(string monthYear)
+        public async Task<IActionResult> GetMonthlyReport(
+            string monthYear,
+            [FromQuery] int familyId)
         {
             try
             {
                 var result = await _budgetService.GetMonthlyReport(
-                    GetFamilyId(),
-                    monthYear);
+                    familyId, monthYear);
                 return Ok(result);
             }
             catch (Exception ex)

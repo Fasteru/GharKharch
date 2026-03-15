@@ -8,7 +8,6 @@ namespace GharKharchaAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class ExpenseTypeController : ControllerBase
     {
         private readonly AppDbContext _context;
